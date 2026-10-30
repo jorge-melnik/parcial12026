@@ -4,9 +4,43 @@ import { Login } from '../../../model/usuario';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../services/notification.service';
+import {
+  IonItem,
+  IonInput,
+  IonList,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonInputPasswordToggle,
+  IonContent,
+  IonButton,
+  IonText,
+} from '@ionic/angular';
 
 @Component({
-  imports: [FormField],
+  imports: [
+    FormField,
+    IonItem,
+    IonInput,
+    IonList,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonInputPasswordToggle,
+    IonContent,
+    IonButton,
+    IonText,
+  ],
   selector: 'app-login',
   styleUrl: './login.page.css',
   templateUrl: './login.page.html',
@@ -28,7 +62,9 @@ export class LoginPage {
 
   public async submitForm(event: Event) {
     event.preventDefault();
+    console.log('SUBMIT');
     if (!this.loginForm().valid()) {
+      console.info('Formulario no valido: ', this.loginForm().value());
       this.loginForm().markAsTouched();
       return;
     }

@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <form novalidate (submit)="this.submitForm($event)">
     <div class="flex-column">
       <label for="username">Usuario:</label>
@@ -34,4 +34,51 @@
     </div>
     <button type="submit">Guardar</button>
   </form>
-</div>
+</div> -->
+
+<form novalidate (submit)="this.submitForm($event)">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Iniciar sesión</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-input
+              size=""
+              label="username"
+              label-placement="floating"
+              fill="outline"
+              [formField]="this.loginForm.username"
+            ></ion-input>
+            @if (
+              this.loginForm.username().touched() && this.loginForm.username().errors().length > 0
+            ) {
+              <ion-text color="danger" class="ion-padding-start" style="font-size: 0.8rem">
+                {{ this.loginForm.username().errors()[0].message }}
+              </ion-text>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-input
+              type="password"
+              label="Password"
+              fill="outline"
+              label-placement="floating"
+              [formField]="this.loginForm.password"
+            >
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" expand="block">Block</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</form>
