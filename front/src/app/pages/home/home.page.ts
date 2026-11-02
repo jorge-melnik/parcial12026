@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ButtonDirective } from 'primeng/button';
 
 @Component({
-  imports: [],
+  imports: [ButtonDirective],
   selector: 'app-home',
   styleUrl: './home.page.css',
   templateUrl: './home.page.html',
