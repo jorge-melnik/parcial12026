@@ -1,117 +1,80 @@
-<div>
-  <form novalidate (submit)="submitForm($event)">
-    <div class="flex-column">
-      <label for="username">Usuario:</label>
-      <input
-        id="username"
-        type="text"
-        [formField]="usuarioForm.username"
-        [class.invalid]="this.usuarioForm.username().invalid() && usuarioForm.username().touched()"
-      />
-      <output>
-        @if (usuarioForm.username().touched() && usuarioForm.username().errors().length > 0) {
-          <small>
-            {{ usuarioForm.username().errors()[0].message }}
-            <!-- aquí también podría hacer un for sobre errors si quisiera -->
-          </small>
+<div class="flex justify-center">
+  <form novalidate (submit)="submitForm($event)" class="flex flex-col gap-4 w-full sm:w-56">
+    <div class="flex flex-col gap-1">
+      <p-iftalabel>
+        <input pInputText type="text" id="username" [formField]="usuarioForm.username" fluid />
+        <label for="username">Username</label>
+      </p-iftalabel>
+
+      @if (usuarioForm.username().touched() && usuarioForm.username().invalid()) {
+        @for (error of usuarioForm.username().errors(); track error.kind) {
+          <p-message severity="error" size="small" variant="simple">{{ error.message }}</p-message>
         }
-      </output>
-    </div>
-
-    <p>
-      Valid username: <strong>{{ this.usuarioForm.username().valid() }}</strong
-      ><br />
-      InValid username: <strong>{{ this.usuarioForm.username().invalid() }}</strong
-      ><br />
-      Touched username: <strong>{{ this.usuarioForm.username().touched() }}</strong
-      ><br />
-      Errors: <strong>{{ this.usuarioForm.username().errors() | json }}</strong>
-    </p>
-
-    <p>
-      Valid form: <strong>{{ this.usuarioForm().valid() }}</strong
-      ><br />
-      Invalid form: <strong>{{ this.usuarioForm().invalid() }}</strong
-      ><br />
-      Touched form: <strong>{{ this.usuarioForm().touched() }}</strong>
-    </p>
-
-    <div class="flex-column">
-      <label for="nombres">Nombres:</label>
-      <input
-        id="nombres"
-        type="text"
-        [formField]="usuarioForm.nombres"
-        [class.invalid]="this.usuarioForm.nombres().invalid()"
-      />
-      <output for="nombres">
-        @if (usuarioForm.nombres().errors().length > 0) {
-          <small>
-            {{ usuarioForm.nombres().errors()[0].message }}
-          </small>
-        }
-      </output>
-    </div>
-
-    <div class="flex-column">
-      <label for="apellidos">Apellidos:</label>
-      <input
-        id="apellidos"
-        type="text"
-        [formField]="usuarioForm.apellidos"
-        [class.invalid]="this.usuarioForm.apellidos().invalid()"
-      />
-      <output for="apellidos">
-        @if (usuarioForm.apellidos().errors().length > 0) {
-          <small>
-            {{ usuarioForm.apellidos().errors()[0].message }}
-          </small>
-        }
-      </output>
-    </div>
-
-    <div class="flex-column">
-      <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-      <input
-        id="fecha_nacimiento"
-        type="date"
-        [formField]="usuarioForm.fecha_nacimiento"
-        [class.invalid]="this.usuarioForm.fecha_nacimiento().invalid()"
-      />
-      <output for="fecha_nacimiento">
-        @if (usuarioForm.fecha_nacimiento().errors().length > 0) {
-          <small>
-            {{ usuarioForm.fecha_nacimiento().errors()[0].message }}
-          </small>
-        }
-      </output>
-    </div>
-
-    <div class="flex-column">
-      <label>Grupos:</label>
-      @for (grupo of ['superadmin', 'admin', 'user']; track grupo) {
-        <div class="flex-row">
-          <label [for]="grupo">
-            {{ grupo }}
-          </label>
-          <input
-            type="checkbox"
-            [id]="grupo"
-            [value]="grupo"
-            [checked]="this.usuarioModel().grupos.includes(grupo)"
-            (change)="onGrupoToggle(grupo, $event)"
-          />
-        </div>
       }
-      <output for="grupos">
-        @if (usuarioForm.grupos().errors().length > 0) {
-          <small>
-            {{ usuarioForm.grupos().errors()[0].message }}
-          </small>
+    </div>
+    <div class="flex flex-col gap-1">
+      <p-iftalabel>
+        <input pInputText type="text" id="nombres" [formField]="usuarioForm.nombres" fluid />
+        <label for="nombres">Nombres</label>
+      </p-iftalabel>
+
+      @if (usuarioForm.nombres().touched() && usuarioForm.nombres().invalid()) {
+        @for (error of usuarioForm.nombres().errors(); track error.kind) {
+          <p-message severity="error" size="small" variant="simple">{{ error.message }}</p-message>
         }
-      </output>
+      }
+    </div>
+    <div class="flex flex-col gap-1">
+      <p-iftalabel>
+        <input pInputText type="text" id="apellidos" [formField]="usuarioForm.apellidos" fluid />
+        <label for="apellidos">Apellidos</label>
+      </p-iftalabel>
+
+      @if (usuarioForm.apellidos().touched() && usuarioForm.apellidos().invalid()) {
+        @for (error of usuarioForm.apellidos().errors(); track error.kind) {
+          <p-message severity="error" size="small" variant="simple">{{ error.message }}</p-message>
+        }
+      }
+    </div>
+    <div class="flex flex-col gap-1">
+      <p-iftalabel>
+        <input
+          pInputText
+          type="date"
+          id="fecha_nacimiento"
+          [formField]="usuarioForm.fecha_nacimiento"
+          fluid
+        />
+        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+      </p-iftalabel>
+
+      @if (usuarioForm.fecha_nacimiento().touched() && usuarioForm.fecha_nacimiento().invalid()) {
+        @for (error of usuarioForm.fecha_nacimiento().errors(); track error.kind) {
+          <p-message severity="error" size="small" variant="simple">{{ error.message }}</p-message>
+        }
+      }
     </div>
 
-    <button type="submit">Guardar</button>
+    <div class="flex flex-col gap-1">
+      <label for="grupos">Grupos</label>
+      <p-selectbutton
+        [options]="[
+          { name: 'Superadmin', value: 'superadmin' },
+          { name: 'Admin', value: 'admin' },
+          { name: 'User', value: 'user' },
+        ]"
+        [formField]="this.usuarioForm.grupos"
+        [multiple]="true"
+        optionLabel="name"
+        optionValue="value"
+      />
+      @if (usuarioForm.fecha_nacimiento().touched() && usuarioForm.fecha_nacimiento().invalid()) {
+        @for (error of usuarioForm.fecha_nacimiento().errors(); track error.kind) {
+          <p-message severity="error" size="small" variant="simple">{{ error.message }}</p-message>
+        }
+      }
+    </div>
+
+    <button pButton type="submit">Guardar</button>
   </form>
 </div>

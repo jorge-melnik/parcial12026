@@ -1,10 +1,27 @@
 import { Component, input, linkedSignal, OnInit, output } from '@angular/core';
 import { form, FormField, maxLength, minLength, required, validate } from '@angular/forms/signals';
 import { Usuario } from '../../model/usuario';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MessageService } from 'primeng/api';
+import { IftaLabelModule } from 'primeng/iftalabel';
 import { JsonPipe } from '@angular/common';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
-  imports: [FormField, JsonPipe],
+  imports: [
+    FormField,
+    JsonPipe,
+    MessageModule,
+    ToastModule,
+    ButtonModule,
+    InputTextModule,
+    FormField,
+    IftaLabelModule,
+    SelectButtonModule,
+  ],
   selector: 'app-usuario-form',
   styleUrl: './usuario.form.css',
   templateUrl: './usuario.form.html',
@@ -22,6 +39,10 @@ export class UsuarioForm {
     minLength(schemaPath.username, 2, {
       message: 'El largo mínimo para el usuario es 2 caracteres.',
     });
+
+    required(schemaPath.nombres, { message: 'El nombre es obligatorio' });
+
+    required(schemaPath.apellidos, { message: 'El apellido es obligatorio' });
 
     required(schemaPath.fecha_nacimiento, { message: 'La fecha de nacimiento es obligatoria' });
     validate(schemaPath.fecha_nacimiento, ({ value }) => {
