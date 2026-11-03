@@ -12,13 +12,13 @@ export const routes: Routes = [
 
   {
     path: 'tareas',
-    canActivateChild: [authenticatedGuard],
+    // canActivateChild: [authenticatedGuard],
     loadChildren: () => import('./tareas.routes'),
   },
 
   {
     path: 'usuarios',
-    canActivateChild: [authenticatedGuard],
+    // canActivateChild: [authenticatedGuard],
     loadChildren: () => import('./usuarios.routes'),
   },
 

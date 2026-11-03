@@ -12,6 +12,7 @@ import { Users } from '@primeicons/angular/users';
 import { Bell } from '@primeicons/angular/bell';
 import { Cog } from '@primeicons/angular/cog';
 import { Sidebar } from '@primeicons/angular/sidebar';
+import { ListCheck } from '@primeicons/angular/list-check';
 
 @Component({
   imports: [
@@ -29,6 +30,7 @@ import { Sidebar } from '@primeicons/angular/sidebar';
     Bell,
     Cog,
     Sidebar,
+    ListCheck,
   ],
   selector: 'app-root',
   styleUrl: './app.css',

@@ -1,34 +1,3 @@
-<!-- <div id="app-layout">
-  <header id="app-header" class="flex-row">
-    <h1>Nombre Del Proyecto</h1>
-    <h6>{{ this.authService.user()?.username || 'anonymus' }}</h6>
-  </header>
-
-  <div id="app-medio">
-    <aside id="app-sidebar">
-      <nav>
-        <ul>
-          <li><a routerLink="/home" routerLinkActive="ruta-activa">Home</a></li>
-          <li><a routerLink="/usuarios" routerLinkActive="ruta-activa">Listar usuarios</a></li>
-          <li><a routerLink="/tareas" routerLinkActive="ruta-activa">Tareas</a></li>
-          <li><a routerLink="/logout" routerLinkActive="ruta-activa">Salir</a></li>
-        </ul>
-      </nav>
-    </aside>
-    
-    <notifications />
-    
-    <main id="app-page">
-      <router-outlet />
-    </main>
-  </div>
-
-  <footer id="app-footer">
-    <p>© 2026 - UCU</p>
-  </footer>
-</div>
- -->
-
 <div class="border border-surface-200 dark:border-surface-700 rounded-lg overflow-hidden">
   <p-sidebar-layout class="min-h-192! relative!">
     @if (isMobile()) {
@@ -53,7 +22,7 @@
                   >
                     A
                   </div>
-                  <span class="font-semibold text-sm">Acme Inc</span>
+                  <span class="font-semibold text-sm">Parcial 1</span>
                 </button>
               </p-sidebar-menu-item>
             </p-sidebar-menu>
@@ -64,40 +33,39 @@
               <p-sidebar-group-content>
                 <p-sidebar-menu>
                   <p-sidebar-menu-item>
-                    <button pSidebarMenuButton [isActive]="true">
+                    <button
+                      pSidebarMenuButton
+                      routerLink="/home"
+                      routerLinkActive
+                      #homeActive="routerLinkActive"
+                      [isActive]="homeActive.isActive"
+                    >
                       <svg data-p-icon="home"></svg>
                       <span>Home</span>
                     </button>
                   </p-sidebar-menu-item>
                   <p-sidebar-menu-item>
-                    <button pSidebarMenuButton>
-                      <svg data-p-icon="inbox"></svg>
-                      <span>Inbox</span>
+                    <button
+                      pSidebarMenuButton
+                      routerLink="/tareas"
+                      routerLinkActive
+                      #tareasActive="routerLinkActive"
+                      [isActive]="tareasActive.isActive"
+                    >
+                      <svg data-p-icon="list-check"></svg>
+                      <span>Tareas</span>
                     </button>
-                    <p-sidebar-menu-badge>3</p-sidebar-menu-badge>
                   </p-sidebar-menu-item>
                   <p-sidebar-menu-item>
-                    <button pSidebarMenuButton>
-                      <svg data-p-icon="search"></svg>
-                      <span>Search</span>
-                    </button>
-                  </p-sidebar-menu-item>
-                  <p-sidebar-menu-item>
-                    <button pSidebarMenuButton>
+                    <button
+                      pSidebarMenuButton
+                      routerLink="/usuarios"
+                      routerLinkActive
+                      #usuariosActive="routerLinkActive"
+                      [isActive]="usuariosActive.isActive"
+                    >
                       <svg data-p-icon="users"></svg>
-                      <span>Team</span>
-                    </button>
-                  </p-sidebar-menu-item>
-                  <p-sidebar-menu-item>
-                    <button pSidebarMenuButton>
-                      <svg data-p-icon="bell"></svg>
-                      <span>Notifications</span>
-                    </button>
-                  </p-sidebar-menu-item>
-                  <p-sidebar-menu-item>
-                    <button pSidebarMenuButton>
-                      <svg data-p-icon="cog"></svg>
-                      <span>Settings</span>
+                      <span>Usuarios</span>
                     </button>
                   </p-sidebar-menu-item>
                 </p-sidebar-menu>
