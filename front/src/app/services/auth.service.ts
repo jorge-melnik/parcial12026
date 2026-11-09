@@ -14,12 +14,28 @@ export class AuthService {
   public readonly token = this.#token.asReadonly();
   public readonly user = this.#user.asReadonly();
 
+  constructor() {
+    const token = localStorage.getItem('token');
+
+    const usuarioString = localStorage.getItem('usuario');
+    if (!token || !usuarioString) return;
+    const usuario = JSON.parse(usuarioString);
+    if (!usuario) return;
+
+    this.#token.set(token);
+    this.#user.set(usuario);
+  }
+
   public setToken(token: string | null) {
     this.#token.set(token);
+    if (token) localStorage.setItem('token', token);
+    else localStorage.removeItem('token');
   }
 
   public setUser(usuario: UsuarioLogueado | null) {
     this.#user.set(usuario);
+    if (usuario) localStorage.setItem('usuario', JSON.stringify(usuario));
+    else localStorage.removeItem('usuario');
   }
 
   public async doLogin(data: Login) {
