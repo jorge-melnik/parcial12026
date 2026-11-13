@@ -50,7 +50,6 @@ import { NotificationService } from './services/notification.service';
     IonItem,
     IonIcon,
     IonToast,
-    IonButton,
   ],
   selector: 'app-root',
   styleUrl: './app.css',

@@ -1,46 +1,48 @@
-<ion-grid>
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="12" size-md="6" size-lg="4">
-      <ion-button expand="block" (click)="takePhoto()">
-        <ion-icon name="image-outline" slot="start"></ion-icon>
-        TOMAR
-      </ion-button>
-      <!-- Mostrar si hay un archivo seleccionado -->
-      @if (selectedFileName()) {
-        <ion-card>
-          <ion-card-content>
-            <ion-card-subtitle>
-              <p><strong>Archivo:</strong> {{ selectedFileName() }}</p>
-            </ion-card-subtitle>
-
-            @if (previewUrl()) {
-              <img [src]="previewUrl()" alt="Vista previa" />
-            }
-          </ion-card-content>
-        </ion-card>
-      }
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-      @if (fileToUpload()) {
-        <ion-button
-          expand="block"
-          color="success"
-          [disabled]="isUploading()"
-          (click)="uploadImage()"
-          style="margin-top: 20px"
-        >
-          @if (isUploading()) {
-            <ion-spinner name="crescent" slot="start"></ion-spinner>
-            Subiendo...
-          } @else {
-            <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
-            Subir al servidor
-          }
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-button expand="block" (click)="takePhoto()">
+          <ion-icon name="image-outline" slot="start"></ion-icon>
+          TOMAR
         </ion-button>
-      }
-    </ion-col>
-  </ion-row>
-</ion-grid>
+        <!-- Mostrar si hay un archivo seleccionado -->
+        @if (selectedFileName()) {
+          <ion-card>
+            <ion-card-content>
+              <ion-card-subtitle>
+                <p><strong>Archivo:</strong> {{ selectedFileName() }}</p>
+              </ion-card-subtitle>
+
+              @if (previewUrl()) {
+                <img [src]="previewUrl()" alt="Vista previa" />
+              }
+            </ion-card-content>
+          </ion-card>
+        }
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        @if (fileToUpload()) {
+          <ion-button
+            expand="block"
+            color="success"
+            [disabled]="isUploading()"
+            (click)="uploadImage()"
+            style="margin-top: 20px"
+          >
+            @if (isUploading()) {
+              <ion-spinner name="crescent" slot="start"></ion-spinner>
+              Subiendo...
+            } @else {
+              <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+              Subir al servidor
+            }
+          </ion-button>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

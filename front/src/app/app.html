@@ -67,7 +67,7 @@
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content>
       @for (noti of this.notificationService.notifications(); track noti.message) {
         <ion-toast
           [isOpen]="true"

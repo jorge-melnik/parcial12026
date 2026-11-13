@@ -12,11 +12,13 @@ import {
   IonCardContent,
   IonSpinner,
   IonCardSubtitle,
+  IonContent,
 } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import { NOTIFICATION_TYPES } from '../../model/notifications';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   imports: [
@@ -29,6 +31,7 @@ import { NOTIFICATION_TYPES } from '../../model/notifications';
     IonCardContent,
     IonSpinner,
     IonCardSubtitle,
+    IonContent,
   ],
   selector: 'app-foto',
   styleUrl: './foto.page.css',
@@ -36,7 +39,7 @@ import { NOTIFICATION_TYPES } from '../../model/notifications';
 })
 export class FotoPage {
   // Inyección de dependencias moderna sin constructor
-  private http = inject(HttpClient);
+  readonly #imageService = inject(ImageService);
   private notificationService = inject(NotificationService);
 
   // Signals para el estado
@@ -67,12 +70,7 @@ export class FotoPage {
     formData.append('file', file); // 'file' coincide con lo que espera request.file()
 
     try {
-      const res = await firstValueFrom(
-        this.http.post<{ message: string; filename: string; url: string }>(
-          'http://localhost:3000/images',
-          formData,
-        ),
-      );
+      const res = await this.#imageService.subirImagen(formData);
       this.isUploading.set(false);
       this.notificationService.addNotification(
         NOTIFICATION_TYPES.OK,

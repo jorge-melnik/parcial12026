@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { cloudUploadOutline, imageOutline } from 'ionicons/icons';
-import { Camera } from '@capacitor/camera';
+
 import {
   IonGrid,
   IonRow,
@@ -12,13 +12,11 @@ import {
   IonCardContent,
   IonSpinner,
   IonCardSubtitle,
-  IonToast,
   IonContent,
 } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import { NOTIFICATION_TYPES } from '../../model/notifications';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   imports: [
@@ -31,6 +29,7 @@ import { NOTIFICATION_TYPES } from '../../model/notifications';
     IonCardContent,
     IonSpinner,
     IonCardSubtitle,
+    IonContent,
   ],
   selector: 'app-home',
   styleUrl: './home.page.css',
@@ -38,7 +37,7 @@ import { NOTIFICATION_TYPES } from '../../model/notifications';
 })
 export class HomePage {
   // Inyección de dependencias moderna sin constructor
-  private http = inject(HttpClient);
+  readonly #imageService = inject(ImageService);
   private notificationService = inject(NotificationService);
 
   // Signals para el estado
@@ -78,12 +77,7 @@ export class HomePage {
     formData.append('file', file); // 'file' coincide con lo que espera request.file()
 
     try {
-      const res = await firstValueFrom(
-        this.http.post<{ message: string; filename: string; url: string }>(
-          'http://localhost:3000/images',
-          formData,
-        ),
-      );
+      const res = await this.#imageService.subirImagen(formData);
       this.isUploading.set(false);
       this.notificationService.addNotification(
         NOTIFICATION_TYPES.OK,
