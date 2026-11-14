@@ -5,7 +5,11 @@ import cors from "@fastify/cors";
 
 export default fp<FastifyCorsOptions>(async (fastify) => {
   fastify.register(cors, {
-    origin: ["http://localhost:4200", "http://misitio.com"],
+    origin: [
+      "http://localhost:4200",
+      "http://misitio.com",
+      "https://localhost",
+    ],
     methods: "GET, POST",
   });
 });
